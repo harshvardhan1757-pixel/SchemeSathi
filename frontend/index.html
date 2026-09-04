@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Backend Test</title>
+</head>
+<body>
+  <h1>Ask the Backend</h1>
+  <input id="question" placeholder="Type your question">
+  <button onclick="sendQuestion()">Send</button>
+  <p id="response"></p>
+
+  <script>
+    async function sendQuestion() {
+      const question = document.getElementById('question').value;
+      const res = await fetch('http://localhost:5000/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question })
+      });
+      const data = await res.json();
+      document.getElementById('response').innerText = data.answer;
+    }
+  </script>
+</body>
+</html>
